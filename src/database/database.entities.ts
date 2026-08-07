@@ -54,5 +54,24 @@ export class Watch {
   createdAt: Date = new Date();
 }
 
+@Entity()
+export class Quote {
+  [OptionalProps]?: "collectedAt";
+  @PrimaryKey({ autoincrement: true })
+  id: number;
+
+  @Property({ comment: "종목" })
+  symbol: string;
+
+  @Property({ comment: "출처" })
+  source: string;
+
+  @Property({ comment: "가격" })
+  price: number;
+
+  @Property({ comment: "수집 시각", onCreate: () => new Date() })
+  collectedAt: Date = new Date();
+}
+
 // MikroORM에 등록할 엔티티 목록. 새 엔티티는 여기에 추가.
-export const entities = [User, Watch];
+export const entities = [User, Watch, Quote];

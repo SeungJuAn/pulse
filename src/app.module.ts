@@ -1,13 +1,15 @@
-import { MikroORM } from '@mikro-orm/core';
-import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { Module, OnModuleInit } from '@nestjs/common';
-import { APP_FILTER } from '@nestjs/core';
-import { AppController } from './app.controller';
-import { AllExceptionFilter } from './common/filters/all-exception.filter';
-import config from './database/database.config';
-import { entities } from './database/database.entities';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
+import { MikroORM } from "@mikro-orm/core";
+import { MikroOrmModule } from "@mikro-orm/nestjs";
+import { Module, OnModuleInit } from "@nestjs/common";
+import { APP_FILTER } from "@nestjs/core";
+import { AppController } from "./app.controller";
+import { AllExceptionFilter } from "./common/filters/all-exception.filter";
+import config from "./database/database.config";
+import { entities } from "./database/database.entities";
+import { UserModule } from "./user/user.module";
+import { AuthModule } from "./auth/auth.module";
+import { QuoteModule } from "./quote/quote.module";
+import { ScheduleModule } from "@nestjs/schedule";
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { AuthModule } from './auth/auth.module';
     MikroOrmModule.forFeature(entities),
     UserModule,
     AuthModule,
+    QuoteModule,
+    ScheduleModule.forRoot(),
     // 👇 M1부터 여기에 모듈을 추가해 나간다: AuthModule, UserModule, ...
   ],
   controllers: [AppController],
