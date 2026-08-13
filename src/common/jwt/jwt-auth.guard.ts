@@ -6,6 +6,7 @@ import {
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Observable } from "rxjs";
+import { JwtPayload } from "./@types";
 
 @Injectable()
 export class JwtGuard implements CanActivate {
@@ -23,7 +24,7 @@ export class JwtGuard implements CanActivate {
       throw new UnauthorizedException("잘못된 토큰 형식입니다.");
     }
     try {
-      const payload = this.jwtService.verify(token);
+      const payload: JwtPayload = this.jwtService.verify(token);
       request.user = payload;
       return true;
     } catch {

@@ -3,6 +3,7 @@ import { MockProxy, mock } from "jest-mock-extended";
 import { QuoteGateway } from "./quote.gateway";
 import { QuoteSource } from "./quote-source";
 import { QuoteCollector } from "./quote-collector.service";
+import { Quote } from "../database/database.entities";
 
 describe("QuoteCollector (unit)", () => {
   let forkedEm: MockProxy<EntityManager>;
@@ -25,7 +26,7 @@ describe("QuoteCollector (unit)", () => {
   it("직전 저장가와 같은 수면 저장하지않는다", async () => {
     const source = makeSource("a", 100);
     const collector = new QuoteCollector([source], em, gateway);
-    forkedEm.findOne.mockResolvedValue({ price: 100 } as any);
+    forkedEm.findOne.mockResolvedValue({ price: 100 } as Quote);
     await collector.collect();
 
     expect(forkedEm.create).not.toHaveBeenCalled();

@@ -29,6 +29,7 @@ export class User {
 // 감시조건
 @Entity()
 export class Watch {
+  [OptionalProps]?: "active" | "createdAt";
   @PrimaryKey({ autoincrement: true })
   id!: number;
 

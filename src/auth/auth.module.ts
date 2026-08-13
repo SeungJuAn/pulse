@@ -11,6 +11,7 @@ import { JwtModule } from "@nestjs/jwt";
     JwtModule.register({
       secret: "dev-secret-change-me",
       signOptions: { expiresIn: "1h" },
+      global: true,
     }),
   ],
   providers: [AuthService],

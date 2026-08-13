@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LoginDto } from "./loginDto";
-import { JwtGuard } from "../common/jwt-auth.guard";
+import { JwtGuard } from "../common/jwt/jwt-auth.guard";
 import { ApiBearerAuth } from "@nestjs/swagger";
 type JwtPayload = { sub: number; iat: number; exp: number };
 @Controller("auth")
