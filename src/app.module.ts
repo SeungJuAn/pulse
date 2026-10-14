@@ -11,6 +11,7 @@ import { AuthModule } from "./auth/auth.module";
 import { QuoteModule } from "./quote/quote.module";
 import { ScheduleModule } from "@nestjs/schedule";
 import { WatchModule } from './watch/watch.module';
+import { AlertModule } from './alert/alert.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { WatchModule } from './watch/watch.module';
     QuoteModule,
     ScheduleModule.forRoot(),
     WatchModule,
+    AlertModule,
     // 👇 M1부터 여기에 모듈을 추가해 나간다: AuthModule, UserModule, ...
   ],
   controllers: [AppController],

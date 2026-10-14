@@ -12,7 +12,7 @@ import {
  */
 @Entity()
 export class User {
-  [OptionalProps]?: "createdAt";
+  [OptionalProps]?: "createdAt" | "notificationPreference";
   @PrimaryKey()
   id!: number;
 
@@ -25,6 +25,9 @@ export class User {
 
   @Property({ onCreate: () => new Date() })
   createdAt: Date = new Date();
+
+  @Property({ default: "email" })
+  notificationPreference: "email" | "sms" = "email";
 }
 // 감시조건
 @Entity()
@@ -74,5 +77,22 @@ export class Quote {
   collectedAt: Date = new Date();
 }
 
+@Entity()
+export class Alert {
+  [OptionalProps]?: "sendAt";
+  @PrimaryKey({ autoincrement: true })
+  id: number;
+  @ManyToOne(() => Watch)
+  watch: Watch;
+
+  @Property()
+  triggeredPrice: number;
+  @Property()
+  channel: string;
+
+  @Property({ onCreate: () => new Date() })
+  sendAt: Date = new Date();
+}
+
 // MikroORM에 등록할 엔티티 목록. 새 엔티티는 여기에 추가.
-export const entities = [User, Watch, Quote];
+export const entities = [User, Watch, Quote, Alert];
